@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import NextLink from './Link';
+import getConfig from 'next/config';
 
 import MainTemplate from './MainTemplate';
 
@@ -55,6 +56,7 @@ const cards = allStories.slice(0, 24)
 
 export default function Album() {
   const classes = useStyles();
+  const { publicRuntimeConfig } = getConfig();
 
   return (
     <MainTemplate>
@@ -80,12 +82,11 @@ export default function Album() {
               <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image={`/static/${card.image}`}
+                    image={`${publicRuntimeConfig.staticFolder}/${card.image}`}
                     title={card.title}
                   />
                   <CardContent className={classes.cardContent}>
-                    <NextLink href={{ pathname: '/story',
-                                      query: { name: `${cardindex+1}`}}}>
+                    <NextLink href={{ pathname: `${publicRuntimeConfig.deployPath}/story/${cardindex+1}`}}>
                       <Typography gutterBottom variant="h5" component="h2">
                         {card.title}
                       </Typography>

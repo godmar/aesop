@@ -6,6 +6,7 @@ import { useSpring, animated, config as springConfig } from 'react-spring';
 
 import MainTemplate from '../src/MainTemplate';
 import ReactMarkdown from '../src/Markdown';
+import getConfig from 'next/config';
 
 const allStories = (ctx => {
   let keys = ctx.keys().map(f => f.replace('./', '').replace('/meta.json', ''));
@@ -58,6 +59,7 @@ function Story({ name }) {
     to: { opacity: showLesson ? 0 : 1 },
     config: springConfig.slow // really slow
   });
+  const { publicRuntimeConfig } = getConfig();
 
   return (
     <MainTemplate>
@@ -72,7 +74,7 @@ function Story({ name }) {
         bgcolor="background.paper"
       >
         <ReactMarkdown>
-          {`<img src="/static/${image}"
+          {`<img src="${publicRuntimeConfig.staticFolder}/${image}"
                  style="float:right; padding: 4px" class="${
                    classes.storyImage
                  }" />\n${body}`}
