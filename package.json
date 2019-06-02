@@ -1,0 +1,35 @@
+{
+  "name": "aesop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^4.0.1",
+    "@material-ui/icons": "^4.0.1",
+    "@material-ui/styles": "^4.0.1",
+    "glob": "^7.1.4",
+    "markdown-to-jsx": "^6.10.2",
+    "next": "^8.1.0",
+    "raw-loader": "^2.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-spring": "^8.0.20"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-define": "^1.3.0",
+    "eslint": "^5.16.0",
+    "prettier": "^1.17.1"
+  },
+  "prettier": {
+    "singleQuote": true
+  }
+}
