@@ -1,0 +1,9 @@
+A Farmer walked through his field one cold winter morning. On the
+ground lay a Snake, stiff and frozen with the cold. The Farmer
+knew how deadly the Snake could be, and yet he picked it up and
+put it in his bosom to warm it back to life.
+
+The Snake soon revived, and when it had enough strength, bit the
+man who had been so kind to it. The bite was deadly and the
+Farmer felt that he must die. As he drew his last breath, he said
+to those standing around:

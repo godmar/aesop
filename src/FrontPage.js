@@ -48,7 +48,7 @@ const allStories = (ctx => {
   return values.map(obj => obj.value);
 })(require.context('../content', true, /\/meta\.json/));
 
-const cards = allStories.slice(0, 48)
+const cards = allStories.slice(0, 90)
 
 export default function Album() {
   const classes = useStyles();

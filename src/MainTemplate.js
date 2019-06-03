@@ -5,15 +5,17 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container';
 import Toolbar from '@material-ui/core/Toolbar';
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-
-import NextLink from './Link';
 
 const useStyles = makeStyles(theme => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
+    padding: theme.spacing(6)
+  },
+  footerTextBox: {
+    maxWidth: 600
   },
   root: {
     paddingLeft: 0,
@@ -29,26 +31,27 @@ export default function Album({ children }) {
       <AppBar className={classes.root} position="relative">
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-          The Æsop for Children
+            The Æsop for Children
           </Typography>
         </Toolbar>
       </AppBar>
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
       {/* Footer */}
       <footer className={classes.footer}>
-        <Typography variant="body1" align="center" gutterBottom>
-          Source: <a href="https://www.gutenberg.org/ebooks/19994">
-            Project Gutenberg
-          </a>
-        </Typography>
-        <Typography variant="body2" align="center" gutterBottom>
-           This eBook is for the use of anyone anywhere at no cost and with
-           almost no restrictions whatsoever.  You may copy it, give it away or
-           re-use it under the terms of the Project Gutenberg License included
-           with this eBook or online at www.gutenberg.org 
-        </Typography>
+        <Box className={classes.footerTextBox} mx="auto">
+          <Typography variant="body1" align="center" gutterBottom>
+            Source:{' '}
+            <a href="https://www.gutenberg.org/ebooks/19994">
+              Project Gutenberg
+            </a>
+          </Typography>
+          <Typography variant="body2" align="center" gutterBottom>
+            This eBook is for the use of anyone anywhere at no cost and with
+            almost no restrictions whatsoever. You may copy it, give it away or
+            re-use it under the terms of the Project Gutenberg License included
+            with this eBook or online at www.gutenberg.org
+          </Typography>
+        </Box>
       </footer>
       {/* End footer */}
     </Container>
