@@ -39,9 +39,15 @@ export default function Album({ children }) {
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="body1" align="center" gutterBottom>
-          Source: <NextLink href="https://www.gutenberg.org/ebooks/19994">
+          Source: <a href="https://www.gutenberg.org/ebooks/19994">
             Project Gutenberg
-          </NextLink>
+          </a>
+        </Typography>
+        <Typography variant="body2" align="center" gutterBottom>
+           This eBook is for the use of anyone anywhere at no cost and with
+           almost no restrictions whatsoever.  You may copy it, give it away or
+           re-use it under the terms of the Project Gutenberg License included
+           with this eBook or online at www.gutenberg.org 
         </Typography>
       </footer>
       {/* End footer */}
