@@ -40,19 +40,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const allStories = (ctx => {
-  //keys.sort((a, b) => Number(a) - Number(b))
-  const values = ctx
-    .keys()
-    .map((el, index) => ({
-      index: el.replace('./', '').replace('/meta.json', ''),
-      value: ctx(el)
-    }));
-  values.sort((a, b) => Number(a.index) - Number(b.index))
-  console.dir(values)
+  const values = ctx.keys().map(el => ({
+    index: el.replace('./', '').replace('/meta.json', ''),
+    value: ctx(el)
+  }));
+  values.sort((a, b) => Number(a.index) - Number(b.index));
   return values.map(obj => obj.value);
 })(require.context('../content', true, /\/meta\.json/));
 
-const cards = allStories.slice(0, 24)
+const cards = allStories.slice(0, 48)
 
 export default function Album() {
   const classes = useStyles();

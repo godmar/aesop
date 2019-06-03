@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Box, Button, IconButton } from '@material-ui/core';
+import { Typography, Box, Button, IconButton, Grid } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { useSpring, animated, config as springConfig } from 'react-spring';
 
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0, 1, 0, 1)  // top right bottom left
   },
   storyTitle: {
-    margin: theme.spacing(1, 1, 1, 1)
+    margin: theme.spacing(2, 1, 1, 2)
   },
   // https://stackoverflow.com/questions/2076284/scaling-images-proportionally-in-css-with-max-width
   storyImage: {
@@ -60,6 +60,7 @@ function Story({ name }) {
     config: springConfig.slow // really slow
   });
   const { publicRuntimeConfig } = getConfig();
+  const lessons = Array.isArray(lesson) ? lesson : [lesson];
 
   return (
     <MainTemplate>
@@ -84,12 +85,20 @@ function Story({ name }) {
         <Box mx="auto" p={1}>
           {showLesson ? (
             <animated.div style={fadeInShowLesson}>
-              <Typography className={classes.storyLesson} variant="body1">
-                {lesson}
-                <IconButton onClick={() => setShowLesson(false)}>
-                  <CloseIcon />
-                </IconButton>
-              </Typography>
+              <Grid container alignItems="center">
+                <Grid item>
+                  {lessons.map(lesson => (
+                    <Typography key={lesson} className={classes.storyLesson} variant="body1">
+                      {lesson}
+                    </Typography>
+                  ))}
+                </Grid>
+                <Grid item>
+                  <IconButton onClick={() => setShowLesson(false)}>
+                    <CloseIcon />
+                  </IconButton>
+                </Grid>
+              </Grid>
             </animated.div>
           ) : (
             <animated.div style={fadeOutButton}>

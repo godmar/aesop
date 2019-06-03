@@ -38,7 +38,7 @@ export default function Album({ children }) {
       </main>
       {/* Footer */}
       <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
+        <Typography variant="body1" align="center" gutterBottom>
           Source: <NextLink href="https://www.gutenberg.org/ebooks/19994">
             Project Gutenberg
           </NextLink>
