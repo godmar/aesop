@@ -10,8 +10,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import NextLink from './Link';
 import getConfig from 'next/config';
+import Router from 'next/router';
 
 import MainTemplate from './MainTemplate';
+import cards from './stories';
 
 const useStyles = makeStyles(theme => ({
   heroContent: {
@@ -39,17 +41,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const allStories = (ctx => {
-  const values = ctx.keys().map(el => ({
-    index: el.replace('./', '').replace('/meta.json', ''),
-    value: ctx(el)
-  }));
-  values.sort((a, b) => Number(a.index) - Number(b.index));
-  return values.map(obj => obj.value);
-})(require.context('../content', true, /\/meta\.json/));
-
-const cards = allStories.slice(0, 90)
-
 export default function Album() {
   const classes = useStyles();
   const { publicRuntimeConfig } = getConfig();
@@ -68,26 +59,47 @@ export default function Album() {
           >
             The Æsop for Children
           </Typography>
+          <Typography variant="body2" align="center">
+            with Pictures by Milo Winter.
+          </Typography>
+          <Typography variant="body2" align="center">
+            Published by Rand McNally & Co.; Chicago, 1919.
+          </Typography>
         </Container>
       </div>
       {/* End hero unit */}
-      <Container className={classes.cardGrid} maxWidth="md">
+      <Container className={classes.cardGrid} maxWidth="xl">
         <Grid container spacing={4}>
           {cards.map((card, cardindex) => (
-            <Grid item key={card.title} xs={12} sm={6} md={4}>
+            <Grid item key={`${cardindex} ${card.title}`} xs={12} sm={6} md={4} lg={3} xl={2}>
               <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image={`${publicRuntimeConfig.staticFolder}/${card.image}`}
-                    title={card.title}
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <NextLink href={{ pathname: `${publicRuntimeConfig.deployPath}/story/${cardindex+1}`}}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {card.title}
-                      </Typography>
-                    </NextLink>
-                  </CardContent>
+                <CardMedia
+                  onClick={() =>
+                    Router.push({
+                      pathname: `${
+                        publicRuntimeConfig.deployPath
+                      }/story/${cardindex + 1}`
+                    })
+                  }
+                  className={classes.cardMedia}
+                  image={`${publicRuntimeConfig.staticFolder}/${
+                    Array.isArray(card.image) ? card.image[0] : (card.image || '19994-h/images/title_th.jpg')
+                  }`}
+                  title={card.title}
+                />
+                <CardContent className={classes.cardContent}>
+                  <NextLink
+                    href={{
+                      pathname: `${
+                        publicRuntimeConfig.deployPath
+                      }/story/${cardindex + 1}`
+                    }}
+                  >
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {card.title}
+                    </Typography>
+                  </NextLink>
+                </CardContent>
               </Card>
             </Grid>
           ))}

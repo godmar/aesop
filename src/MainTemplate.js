@@ -5,9 +5,14 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container';
 import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import TableChartIcon from '@material-ui/icons/TableChart';
+import HomeIcon from '@material-ui/icons/Home';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
+import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
+import getConfig from 'next/config';
 
 const useStyles = makeStyles(theme => ({
   footer: {
@@ -25,6 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Album({ children }) {
   const classes = useStyles();
+  const { publicRuntimeConfig } = getConfig();
 
   return (
     <Container className={classes.root} maxWidth={false}>
@@ -33,6 +39,18 @@ export default function Album({ children }) {
           <Typography variant="h6" color="inherit" noWrap>
             The Æsop for Children
           </Typography>
+          <Typography style={{flexGrow: 1}} align="right">
+          </Typography>
+          <Link href={{ pathname: `${publicRuntimeConfig.deployPath}/toc`}}>
+            <IconButton color="inherit">
+              <TableChartIcon />
+            </IconButton>
+          </Link>
+          <Link href={{ pathname: `${publicRuntimeConfig.deployPath}/`}}>
+            <IconButton color="inherit">
+              <HomeIcon />
+            </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
       <main>{children}</main>
@@ -40,7 +58,10 @@ export default function Album({ children }) {
       <footer className={classes.footer}>
         <Box className={classes.footerTextBox} mx="auto">
           <Typography variant="body1" align="center" gutterBottom>
-            Source:{' '}
+          Web Design and Implementation by Godmar Back (godmar@gmail.com)
+          </Typography>
+          <Typography variant="body1" align="center" gutterBottom>
+            Content Source:{' '}
             <a href="https://www.gutenberg.org/ebooks/19994">
               Project Gutenberg
             </a>

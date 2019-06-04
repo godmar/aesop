@@ -12,7 +12,8 @@ module.exports = {
   },
   exportPathMap: async function () {
     const base = {
-      "/": { page: "/" }
+      "/": { page: "/" },
+      "/toc": { page: "/toc" },
     }
     const files = await glob("content/*/meta.json", {});
     const rest = files.map(f => f.replace('content/', '').replace('/meta.json', ''))

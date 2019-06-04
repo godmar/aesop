@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Box, Button, IconButton, Grid } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { useSpring, animated, config as springConfig } from 'react-spring';
+import { useMorph } from 'react-morph';
 
 import MainTemplate from '../src/MainTemplate';
 import ReactMarkdown from '../src/Markdown';
@@ -49,17 +49,11 @@ const useStyles = makeStyles(theme => ({
 function Story({ name }) {
   const body = allBodies[name];
   const { title, image, lesson } = allStories[name];
+  const images = Array.isArray(image) ? image : image ? [image] : [];
   const classes = useStyles();
   const [ showLesson, setShowLesson ] = useState(false);
-  const fadeInShowLesson = useSpring({
-    to: { opacity: showLesson ? 1 : 0 },
-    config: springConfig.molasses // really slow
-  });
-  const fadeOutButton = useSpring({
-    to: { opacity: showLesson ? 0 : 1 },
-    config: springConfig.slow // really slow
-  });
   const { publicRuntimeConfig } = getConfig();
+  const morph = useMorph();
   const lessons = Array.isArray(lesson) ? lesson : [lesson];
 
   return (
@@ -75,41 +69,39 @@ function Story({ name }) {
         bgcolor="background.paper"
       >
         <ReactMarkdown>
-          {`<img src="${publicRuntimeConfig.staticFolder}/${image}"
-                 style="float:right; padding: 4px" class="${
+          {images.map((image, i) =>
+              `<img src="${publicRuntimeConfig.staticFolder}/${image}"
+                 style="float:${i%2 ? 'left' : 'right'}; padding: 4px" class="${
                    classes.storyImage
-                 }" />\n${body}`}
+                 }" />`
+            ).join('') + `\n${body}`}
         </ReactMarkdown>
       </Box>
       <Box display="flex">
         <Box mx="auto" p={1}>
           {showLesson ? (
-            <animated.div style={fadeInShowLesson}>
-              <Grid container alignItems="center">
-                <Grid item>
-                  {lessons.map(lesson => (
-                    <Typography key={lesson} className={classes.storyLesson} variant="body1">
-                      {lesson}
-                    </Typography>
-                  ))}
-                </Grid>
-                <Grid item>
-                  <IconButton onClick={() => setShowLesson(false)}>
-                    <CloseIcon />
-                  </IconButton>
-                </Grid>
+            <Grid {...morph} container alignItems="center" onClick={() => setShowLesson(false)}>
+              <Grid item>
+                {lessons.map(lesson => (
+                  <Typography
+                    key={lesson}
+                    className={classes.storyLesson}
+                    variant="body1"
+                  >
+                    {lesson}
+                  </Typography>
+                ))}
               </Grid>
-            </animated.div>
+            </Grid>
           ) : (
-            <animated.div style={fadeOutButton}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => setShowLesson(true)}
-              >
-                Click here to see the lesson
-              </Button>
-            </animated.div>
+            <Button
+              {...morph}
+              variant="contained"
+              color="primary"
+              onClick={() => setShowLesson(true)}
+            >
+              Click here to see the lesson
+            </Button>
           )}
         </Box>
       </Box>
