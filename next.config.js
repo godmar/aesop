@@ -2,7 +2,8 @@ const util = require('util');
 const glob = util.promisify(require('glob'));
 
 const debug = process.env.NODE_ENV !== "production";
-const deployPath = '/aesop';
+//const deployPath = '/aesop';
+const deployPath = '';
 
 module.exports = {
   assetPrefix: debug ? '' : deployPath,

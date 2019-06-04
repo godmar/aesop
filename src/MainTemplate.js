@@ -1,7 +1,7 @@
 
 // as per https://github.com/mui-org/material-ui/tree/master/examples/nextjs
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
 import getConfig from 'next/config';
+import dynamic from 'next/dynamic'
 
 const useStyles = makeStyles(theme => ({
   footer: {
@@ -28,12 +29,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Album({ children }) {
+const NoSSRDummy = dynamic(
+  () => import('./analytics'),
+  {
+    ssr: false,
+  }
+);
+
+export default function MainTemplate({ children }) {
   const classes = useStyles();
   const { publicRuntimeConfig } = getConfig();
-
   return (
     <Container className={classes.root} maxWidth={false}>
+      <NoSSRDummy />
       <AppBar className={classes.root} position="relative">
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
