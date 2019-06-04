@@ -46,7 +46,7 @@ export default function Album() {
   const { publicRuntimeConfig } = getConfig();
 
   return (
-    <MainTemplate>
+    <MainTemplate title="The Æsop for Children">
       {/* Hero unit */}
       <div className={classes.heroContent}>
         <Container maxWidth="lg">

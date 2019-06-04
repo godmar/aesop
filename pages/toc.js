@@ -18,7 +18,7 @@ export default function Toc() {
   const { publicRuntimeConfig } = getConfig();
   const classes = useStyles();
   return (
-    <MainTemplate>
+    <MainTemplate title="The Æsop for Children - Table of Contents">
       <Typography className={classes.tableOfContent} variant="h4">
         Table of Content
       </Typography>

@@ -56,7 +56,7 @@ function Story({ name }) {
   const lessons = Array.isArray(lesson) ? lesson : [lesson];
 
   return (
-    <MainTemplate>
+    <MainTemplate title={`The Æsop for Children - ${title}`}>
       <Typography className={classes.storyTitle} variant="h5">
         {title}
       </Typography>
