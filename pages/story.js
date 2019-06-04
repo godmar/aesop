@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Box, Button, IconButton, Grid } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
 import { useMorph } from 'react-morph';
 
 import MainTemplate from '../src/MainTemplate';

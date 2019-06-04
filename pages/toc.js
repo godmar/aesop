@@ -2,13 +2,10 @@ import React from 'react';
 import { Typography, List, ListItem, ListItemText } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import getConfig from 'next/config';
+import Link from 'next/link';
 
 import MainTemplate from '../src/MainTemplate';
 import stories from '../src/stories';
-
-function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
-}
 
 const useStyles = makeStyles(theme => ({
   tableOfContent: {
@@ -27,11 +24,17 @@ export default function Toc() {
       </Typography>
       <List>
         {stories.map((s, cardindex) => (
-          <ListItemLink key={cardindex}
-                href={`${publicRuntimeConfig.deployPath}/story/${cardindex + 1}`}
-              >
-            <ListItemText primary={`${cardindex+1}. ${s.title}`} />
-          </ListItemLink>
+          <ListItem button key={cardindex}>
+            <Link
+              href={{
+                pathname: `${publicRuntimeConfig.deployPath}/story`,
+                query: { name: `${cardindex + 1}` }
+              }}
+              as={`${publicRuntimeConfig.deployPath}/story/${cardindex + 1}`}
+            >
+              <ListItemText primary={`${cardindex + 1}. ${s.title}`} />
+            </Link>
+          </ListItem>
         ))}
       </List>
     </MainTemplate>

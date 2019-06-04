@@ -70,17 +70,17 @@ export default function Album() {
       {/* End hero unit */}
       <Container className={classes.cardGrid} maxWidth="xl">
         <Grid container spacing={4}>
-          {cards.map((card, cardindex) => (
-            <Grid item key={`${cardindex} ${card.title}`} xs={12} sm={6} md={4} lg={3} xl={2}>
+          {cards.map((card, cardindex) => {
+            const navTarget = {
+                      pathname: `${publicRuntimeConfig.deployPath}/story`,
+                      query: { name: `${cardindex + 1}` }
+                    };
+            const asPath = `${publicRuntimeConfig.deployPath}/story/${cardindex + 1}`;
+
+            return <Grid item key={`${cardindex} ${card.title}`} xs={12} sm={6} md={4} lg={3} xl={2}>
               <Card className={classes.card}>
                 <CardMedia
-                  onClick={() =>
-                    Router.push({
-                      pathname: `${
-                        publicRuntimeConfig.deployPath
-                      }/story/${cardindex + 1}`
-                    })
-                  }
+                  onClick={() => Router.push({ ...navTarget, asPath }) }
                   className={classes.cardMedia}
                   image={`${publicRuntimeConfig.staticFolder}/${
                     Array.isArray(card.image) ? card.image[0] : (card.image || '19994-h/images/title_th.jpg')
@@ -88,21 +88,15 @@ export default function Album() {
                   title={card.title}
                 />
                 <CardContent className={classes.cardContent}>
-                  <NextLink
-                    href={{
-                      pathname: `${
-                        publicRuntimeConfig.deployPath
-                      }/story/${cardindex + 1}`
-                    }}
-                  >
+                  <NextLink href={navTarget} as={asPath} >
                     <Typography gutterBottom variant="h5" component="h2">
                       {card.title}
                     </Typography>
                   </NextLink>
                 </CardContent>
               </Card>
-            </Grid>
-          ))}
+            </Grid>;
+          })}
         </Grid>
       </Container>
     </MainTemplate>
