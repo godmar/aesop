@@ -26,10 +26,7 @@ export default function Toc() {
         {stories.map((s, cardindex) => (
           <ListItem button key={cardindex}>
             <Link
-              href={{
-                pathname: `${publicRuntimeConfig.deployPath}/story`,
-                query: { name: `${cardindex + 1}` }
-              }}
+              href={`${publicRuntimeConfig.deployPath}/story/[storyid]`}
               as={`${publicRuntimeConfig.deployPath}/story/${cardindex + 1}`}
             >
               <ListItemText primary={`${cardindex + 1}. ${s.title}`} />

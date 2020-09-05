@@ -71,10 +71,7 @@ export default function Album() {
       <Container className={classes.cardGrid} maxWidth="xl">
         <Grid container spacing={4}>
           {cards.map((card, cardindex) => {
-            const navTarget = {
-                      pathname: `${publicRuntimeConfig.deployPath}/story`,
-                      query: { name: `${cardindex + 1}` }
-                    };
+            const navTarget = `${publicRuntimeConfig.deployPath}/story/[storyid]`;
             const asPath = `${publicRuntimeConfig.deployPath}/story/${cardindex + 1}`;
 
             return <Grid item key={`${cardindex} ${card.title}`} xs={12} sm={6} md={4} lg={3} xl={2}>
