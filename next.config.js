@@ -11,6 +11,16 @@ module.exports = {
     deployPath: debug ? '' : deployPath,
     staticFolder: debug ? '/static' : `${deployPath}/static`
   },
+  exportPathMap: async function () {
+    const base = {
+      "/": { page: "/" },
+      "/toc": { page: "/toc" },
+    }
+    const files = await glob("content/*/meta.json", {});
+    const rest = files.map(f => f.replace('content/', '').replace('/meta.json', ''))
+         .reduce((acc, cur) => ({ ...acc, [`/story/${cur}`] : { page: `/story/[storyid]` } }), {});
+    return { ...base, ...rest };
+  },
   webpack: (config) => {
     config.module.rules.push(
       {
