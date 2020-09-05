@@ -35,8 +35,9 @@ export const logException = (description = '', fatal = false) => {
   }
 }
 
-export default () => {
+const Analytics = () => {
   logPageView();
   return <React.Fragment />;
 }
+export default Analytics;
 

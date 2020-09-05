@@ -1,20 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import React from 'react';
+import React,{forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withRouter } from 'next/router';
 import NextLink from 'next/link';
 import MuiLink from '@material-ui/core/Link';
 
-function NextComposed(props) {
+const NextComposed = forwardRef((props, ref) => {
   const { as, href, prefetch, ...other } = props;
 
   return (
-    <NextLink href={href} prefetch={prefetch} as={as}>
-      <a {...other} />
+    <NextLink href={href} passHref={true} prefetch={prefetch} as={as} >
+      <a ref = {ref} {...other} />
     </NextLink>
   );
-}
+})
 
 NextComposed.propTypes = {
   as: PropTypes.string,
@@ -22,8 +22,11 @@ NextComposed.propTypes = {
   prefetch: PropTypes.bool,
 };
 
-// A styled version of the Next.js Link component:
-// https://nextjs.org/docs/#with-link
+/**
+* A styled version of the Next.js Link component:
+* https://nextjs.org/docs/#with-link
+* @component
+*/
 function Link(props) {
   const { activeClassName, router, className: classNameProps, naked, ...other } = props;
 
